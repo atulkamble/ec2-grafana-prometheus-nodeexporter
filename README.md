@@ -80,10 +80,10 @@ http://<EC2-PUBLIC-IP>:3000
 
 ---
 
-# WinSCP  >> Install 
+## WinSCP  >> Install 
 https://winscp.net/eng/download.php
 
-# Download Prometheus Setup | LTS/Linux
+## Download Prometheus Setup | LTS/Linux
 https://prometheus.io/download/
 
 
