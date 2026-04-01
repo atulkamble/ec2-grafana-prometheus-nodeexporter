@@ -1,4 +1,4 @@
-# 📊 Grafana & Prometheus Installation on AWS EC2
+# 📊 Grafana & Prometheus, Node Exporter Installation on AWS EC2
 
 ## 🔹 Environment Details
 
