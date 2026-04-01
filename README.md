@@ -191,12 +191,143 @@ http://<EC2-PUBLIC-IP>:9090
 
 ---
 
+# 📊 Node Exporter Setup (Linux)
+
+## 🔹 Overview
+
+**Node Exporter** is a component of Prometheus used to collect system-level metrics like CPU, memory, disk, and network from Linux servers.
+
+---
+
+## 🔹 Step 1: Download & Extract
+
+```bash
+wget https://github.com/prometheus/node_exporter/releases/download/v1.10.2/node_exporter-1.10.2.linux-amd64.tar.gz
+tar xvfz node_exporter-1.10.2.linux-amd64.tar.gz
+cd node_exporter-1.10.2.linux-amd64
+```
+
+---
+
+## 🔹 Step 2: Run Manually (Test)
+
+```bash
+./node_exporter
+```
+
+👉 Access in browser:
+
+```
+http://<SERVER-IP>:9100/metrics
+```
+
+---
+
+## 🔹 Step 3: Install Binary & Create User
+
+```bash
+sudo cp node_exporter /usr/local/bin
+sudo useradd node_exporter --no-create-home --shell /bin/false
+sudo chown node_exporter:node_exporter /usr/local/bin/node_exporter
+```
+
+---
+
+## 🔹 Step 4: Create Systemd Service
+
+```bash
+sudo vi /etc/systemd/system/node_exporter.service
+```
+
+### Add below content:
+
+```ini
+[Unit]
+Description=Node Exporter
+After=network.target
+
+[Service]
+User=node_exporter
+Group=node_exporter
+Type=simple
+ExecStart=/usr/local/bin/node_exporter
+
+[Install]
+WantedBy=multi-user.target
+```
+
+---
+
+## 🔹 Step 5: Start & Enable Service
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl start node_exporter
+sudo systemctl enable node_exporter
+sudo systemctl status node_exporter
+```
+
+---
+
+## 🔹 Step 6: Verify
+
+Open browser:
+
+```
+http://<SERVER-IP>:9100/metrics
+```
+
+✔ You should see system metrics output
+
+---
+
+## 🔹 Common Metrics Collected
+
+* CPU usage
+* Memory usage
+* Disk I/O
+* Network traffic
+* File system stats
+
+---
+
+## 🔹 Integration with Prometheus
+
+Add this in Prometheus config:
+
+```yaml
+scrape_configs:
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets: ['<SERVER-IP>:9100']
+```
+
+---
+
+## 🔹 Quick Notes (Exam / Interview)
+
+* Default port → **9100**
+* Stateless exporter
+* Pull-based monitoring (Prometheus scrapes metrics)
+* Works with Grafana dashboards
+
+---
+
+## 🔹 Troubleshooting
+
+* Port not accessible → Check firewall (port 9100)
+* Service not starting → `journalctl -u node_exporter`
+* Binary issue → Ensure correct architecture (amd64)
+
+---
+
 ## 🔹 Step 10: AWS Security Group Configuration
 
 | Service    | Port   | Protocol |
 | ---------- | ------ | -------- |
 | Grafana    | `3000` | TCP      |
 | Prometheus | `9090` | TCP      |
+| Node Exporter | `9100` | TCP      |
 | SSH        | `22`   | TCP      |
 
 ---
