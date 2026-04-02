@@ -13,16 +13,6 @@
 
 ---
 
-![Image](https://d2908q01vomqb2.cloudfront.net/ca3512f4dfa95a03169c5a670a4c91a19b3077b4/2021/04/19/koffir_prometheus_monitor_ec2_f1_new.png)
-
-![Image](https://prometheus.io/assets/docs/grafana_qps_graph.png)
-
-![Image](https://eadn-wc03-4064062.nxedge.io/cdn/wp-content/uploads/2021/06/Prometheus-Server_Chart.png)
-
-![Image](https://media.licdn.com/dms/image/v2/D5612AQGmaf97dCRh-w/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1681294143595?e=2147483647\&t=WQV1V_z5Te9L7B6JRAggbtQBZKO_Wdxjo80gTF7zusc\&v=beta)
-
----
-
 ## 🧩 Architecture Overview
 
 * **Grafana** → Visualization layer (Port `3000`)
